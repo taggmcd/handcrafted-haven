@@ -14,4 +14,4 @@ Tagg McDonald
 
 Color Pallet - https://coolors.co/9f9aa4-e7cfcd-cfd8d7-b5c9c3-cab1bd
 
-Fonts -
+Fonts - Roboto
