@@ -13,6 +13,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        softGrayPurple: "#9F9AA4",
+        blushPink: "#E7CFCD",
+        paleTealGray: "#CFD8D7",
+        desaturatedMint: "#B5C9C3",
+        mutedLavenderPink: "#CAB1BD",
       },
     },
   },
@@ -21,4 +26,5 @@ const config: Config = {
     typography,
   ],
 };
+
 export default config;

@@ -1,24 +1,36 @@
-// src/lib/mongodb.ts
-
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || ''; // Set your MongoDB connection URI
-const options = {};
+// Retrieve the MongoDB URI from environment variables
+const uri = process.env.MONGODB_URI;
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+// Define the connection options
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+};
 
-if (process.env.NODE_ENV === 'development') {
-    // In development mode, use a global variable so the client is not created multiple times
-    if (!global._mongoClientPromise) {
-        client = new MongoClient(uri, options);
-        global._mongoClientPromise = client.connect();
+// Create a MongoDB client
+const client = new MongoClient(uri, options);
+
+// Function to connect to the database
+export async function connectToDatabase() {
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        // Return the client and database instance
+        const db = client.db(); // Use your database name if needed
+        return { client, db };
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        throw error; // Rethrow the error for further handling
     }
-    clientPromise = global._mongoClientPromise;
-} else {
-    // In production mode, it's best to create a new client for every invocation
-    client = new MongoClient(uri, options);
-    clientPromise = client.connect();
 }
 
-export default clientPromise;
+// Function to close the database connection
+export async function closeDatabaseConnection() {
+    try {
+        await client.close();
+    } catch (error) {
+        console.error('Error closing MongoDB connection:', error);
+    }
+}

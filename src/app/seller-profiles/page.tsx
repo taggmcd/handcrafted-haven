@@ -1,24 +1,116 @@
-// src/app/seller-profiles/page.tsx
+"use client"; // This line marks the component as a Client Component
 
-import React from 'react';
-import Link from 'next/link'; // Import Link for navigation
+import React, { useState } from 'react';
+import { Product } from '../../../types'; // Adjust the path according to your structure
 
-const SellerProfilesPage = () => {
+const CreateProfile = () => {
+    const [name, setName] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [story, setStory] = useState<string>('');
+    const [products, setProducts] = useState<Product[]>([{ name: '', description: '' }]); // Initialize with Product type
+
+    const handleProductChange = (index: number, field: keyof Product, value: string) => {
+        const newProducts = [...products];
+        newProducts[index][field] = value; // Ensure field is a key of Product
+        setProducts(newProducts);
+    };
+
+    const addProduct = () => {
+        setProducts([...products, { name: '', description: '' }]); // Add an empty product
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const response = await fetch('/api/sellerProfiles', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, description, story, products }),
+        });
+
+        if (response.ok) {
+            console.log('Profile created successfully');
+            // Optionally, redirect to the list page or show a success message
+        } else {
+            console.error('Failed to create profile');
+            // Optionally, show an error message
+        }
+    };
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
-                <h1 className="text-3xl font-bold text-center">Seller Profiles</h1>
-                <p className="mt-2 text-center text-gray-600">Welcome to the Seller Profiles page!</p>
-
-                <div className="mt-6">
-                    <Link href="/seller-profiles/create" className="inline-block px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                        Create Seller Profile
-                    </Link>
-                    {/* You can add more links or buttons here */}
-                </div>
+            <div className="w-full max-w-2xl p-6 bg-blushPink rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold text-center text-black">Create Seller Profile</h1> {/* Changed to black */}
+                <form onSubmit={handleSubmit} className="mt-4">
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-black">Name:</label> {/* Changed to black */}
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="description" className="block text-sm font-medium text-black">Description:</label> {/* Changed to black */}
+                        <textarea
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                        ></textarea>
+                    </div>
+                    <div className="mt-4">
+                        <label htmlFor="story" className="block text-sm font-medium text-black">Your Story:</label> {/* Changed to black */}
+                        <textarea
+                            id="story"
+                            value={story}
+                            onChange={(e) => setStory(e.target.value)}
+                            required
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                        ></textarea>
+                    </div>
+                    <div className="mt-4">
+                        <h2 className="text-lg font-medium text-black">Products:</h2> {/* Changed to black */}
+                        {products.map((product, index) => (
+                            <div key={index} className="mt-2">
+                                <input
+                                    type="text"
+                                    placeholder="Product Name"
+                                    value={product.name}
+                                    onChange={(e) => handleProductChange(index, 'name', e.target.value)}
+                                    className="block w-full p-2 border border-gray-300 rounded"
+                                    required
+                                />
+                                <textarea
+                                    placeholder="Product Description"
+                                    value={product.description}
+                                    onChange={(e) => handleProductChange(index, 'description', e.target.value)}
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                                    required
+                                ></textarea>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={addProduct}
+                            className="mt-2 px-4 py-2 text-white bg-deepBlue rounded hover:bg-darkBlue"
+                        >
+                            Add Another Product
+                        </button>
+                    </div>
+                    <button type="submit" className="mt-4 w-full px-4 py-2 text-white bg-brightGreen rounded hover:bg-deepGreen">
+                        Create Profile
+                    </button>
+                </form>
             </div>
         </div>
     );
 };
 
-export default SellerProfilesPage; // Ensure you're exporting a valid React component
+export default CreateProfile;

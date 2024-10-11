@@ -1,19 +1,17 @@
-// src/app/api/sellerProfiles/route.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { connectToDatabase, closeDatabaseConnection } from '../../lib/mongodb';
 
-import { NextResponse } from 'next/server';
-import clientPromise from '../../lib/mongodb';  // This should now work after creating the mongodb.ts file
-
-export async function POST(req: Request) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const client = await clientPromise;
-        const db = client.db('yourDatabaseName'); // Change to your database name
-        const collection = db.collection('sellerProfiles');
+        const { client, db } = await connectToDatabase();
 
-        const body = await req.json();
-        const newProfile = await collection.insertOne(body);
+        // Perform database operations, e.g., fetching data
+        const sellerProfiles = await db.collection('sellerProfiles').find({}).toArray();
 
-        return NextResponse.json(newProfile);
+        res.status(200).json(sellerProfiles);
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to create profile' }, { status: 500 });
+        res.status(500).json({ error: 'Error fetching seller profiles' });
+    } finally {
+        await closeDatabaseConnection(); // Ensure connection is closed
     }
 }

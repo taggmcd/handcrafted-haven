@@ -1,5 +1,3 @@
-// src/app/seller-profiles/list/page.tsx
-
 "use client"; // This line marks the component as a Client Component
 
 import React, { useEffect, useState } from 'react';
@@ -27,15 +25,25 @@ const ListProfiles = () => {
     }, []); // Empty dependency array ensures this runs once when the component mounts
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
-                <h1 className="text-3xl font-bold text-center">Seller Profiles</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-softGrayPurple p-4">
+            <div className="w-full max-w-2xl p-6 bg-blushPink rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold text-center text-mutedLavenderPink">Seller Profiles</h1>
                 <ul className="mt-4 space-y-4">
                     {/* Map over the profiles array to render each profile */}
                     {profiles.map((profile) => (
-                        <li key={profile.id} className="p-4 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow">
-                            <h2 className="text-xl font-semibold">{profile.name}</h2> {/* Display the profile name */}
-                            <p className="mt-2 text-gray-600">{profile.description}</p> {/* Display the profile description */}
+                        <li key={profile.id} className="p-4 border border-desaturatedMint rounded-lg hover:shadow-lg transition-shadow">
+                            <h2 className="text-xl font-semibold text-softGrayPurple">{profile.name}</h2> {/* Display the profile name */}
+                            <p className="mt-2 text-paleTealGray">{profile.description}</p> {/* Display the profile description */}
+                            <p className="mt-2 italic text-blushPink">{profile.story}</p> {/* Display the seller's story */}
+                            <h3 className="mt-4 font-medium text-mutedLavenderPink">Products:</h3>
+                            <ul className="mt-2 space-y-2">
+                                {profile.products.map((product, index) => (
+                                    <li key={index} className="border border-softGrayPurple rounded p-2">
+                                        <h4 className="font-semibold text-mutedLavenderPink">{product.name}</h4>
+                                        <p className="text-paleTealGray">{product.description}</p>
+                                    </li>
+                                ))}
+                            </ul>
                         </li>
                     ))}
                 </ul>

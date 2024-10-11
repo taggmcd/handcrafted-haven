@@ -1,82 +1,113 @@
-// src/app/seller-profiles/create/page.tsx
-
-"use client"; // Add this line to mark the component as a Client Component
+"use client"; // This line marks the component as a Client Component
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter for navigation
+import { Product } from '../../../types'; // Adjust the path according to your structure
 
 const CreateProfile = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-    const router = useRouter(); // Initialize router
+    const [name, setName] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [story, setStory] = useState<string>('');
+    const [products, setProducts] = useState<Product[]>([{ name: '', description: '' }]); // Initialize with Product type
+
+    const handleProductChange = (index: number, field: keyof Product, value: string) => {
+        const newProducts = [...products];
+        newProducts[index][field] = value; // Ensure field is a key of Product
+        setProducts(newProducts);
+    };
+
+    const addProduct = () => {
+        setProducts([...products, { name: '', description: '' }]); // Add an empty product
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setLoading(true);
-        setMessage('');
 
-        try {
-            const response = await fetch('/api/sellerProfiles', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, description }),
-            });
+        const response = await fetch('/api/sellerProfiles', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, description, story, products }),
+        });
 
-            if (response.ok) {
-                setMessage('Profile created successfully!');
-                setTimeout(() => {
-                    router.push('/seller-profiles'); // Redirect after 2 seconds
-                }, 2000);
-            } else {
-                throw new Error('Failed to create profile');
-            }
-        } catch (error) {
-            console.error(error);
-            setMessage('Failed to create profile. Please try again.');
-        } finally {
-            setLoading(false);
+        if (response.ok) {
+            console.log('Profile created successfully');
+            // Optionally, redirect to the list page or show a success message
+        } else {
+            console.error('Failed to create profile');
+            // Optionally, show an error message
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-                <h1 className="text-2xl font-bold text-center">Create Seller Profile</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-softGrayPurple">
+            <div className="w-full max-w-2xl p-6 bg-blushPink rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold text-center text-mutedLavenderPink">Create Seller Profile</h1>
                 <form onSubmit={handleSubmit} className="mt-4">
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-mutedLavenderPink">Name:</label>
                         <input
                             type="text"
                             id="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-desaturatedMint rounded"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
+                    <div className="mt-4">
+                        <label htmlFor="description" className="block text-sm font-medium text-mutedLavenderPink">Description:</label>
                         <textarea
                             id="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500"
+                            className="mt-1 block w-full p-2 border border-desaturatedMint rounded"
                         ></textarea>
                     </div>
-                    <button 
-                        type="submit" 
-                        disabled={loading} 
-                        className={`w-full p-2 text-white rounded-md focus:outline-none ${loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
-                    >
-                        {loading ? 'Creating...' : 'Create Profile'}
+                    <div className="mt-4">
+                        <label htmlFor="story" className="block text-sm font-medium text-mutedLavenderPink">Your Story:</label>
+                        <textarea
+                            id="story"
+                            value={story}
+                            onChange={(e) => setStory(e.target.value)}
+                            required
+                            className="mt-1 block w-full p-2 border border-desaturatedMint rounded"
+                        ></textarea>
+                    </div>
+                    <div className="mt-4">
+                        <h2 className="text-lg font-medium text-mutedLavenderPink">Products:</h2>
+                        {products.map((product, index) => (
+                            <div key={index} className="mt-2">
+                                <input
+                                    type="text"
+                                    placeholder="Product Name"
+                                    value={product.name}
+                                    onChange={(e) => handleProductChange(index, 'name', e.target.value)}
+                                    className="block w-full p-2 border border-desaturatedMint rounded"
+                                    required
+                                />
+                                <textarea
+                                    placeholder="Product Description"
+                                    value={product.description}
+                                    onChange={(e) => handleProductChange(index, 'description', e.target.value)}
+                                    className="mt-1 block w-full p-2 border border-desaturatedMint rounded"
+                                    required
+                                ></textarea>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={addProduct}
+                            className="mt-2 px-4 py-2 text-white bg-deepBlue rounded hover:bg-darkBlue"
+                        >
+                            Add Another Product
+                        </button>
+                    </div>
+                    <button type="submit" className="mt-4 w-full px-4 py-2 text-white bg-brightGreen rounded hover:bg-deepGreen">
+                        Create Profile
                     </button>
                 </form>
-                {message && <p className="mt-4 text-center text-red-500">{message}</p>} {/* Display success/error message */}
             </div>
         </div>
     );
