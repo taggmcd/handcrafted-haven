@@ -27,17 +27,19 @@ const ListProfiles = () => {
     }, []); // Empty dependency array ensures this runs once when the component mounts
 
     return (
-        <div>
-            <h1>Seller Profiles</h1>
-            <ul>
-                {/* Map over the profiles array to render each profile */}
-                {profiles.map((profile) => (
-                    <li key={profile.id}> {/* Unique key for each list item */}
-                        <h2>{profile.name}</h2> {/* Display the profile name */}
-                        <p>{profile.description}</p> {/* Display the profile description */}
-                    </li>
-                ))}
-            </ul>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+            <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold text-center">Seller Profiles</h1>
+                <ul className="mt-4 space-y-4">
+                    {/* Map over the profiles array to render each profile */}
+                    {profiles.map((profile) => (
+                        <li key={profile.id} className="p-4 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow">
+                            <h2 className="text-xl font-semibold">{profile.name}</h2> {/* Display the profile name */}
+                            <p className="mt-2 text-gray-600">{profile.description}</p> {/* Display the profile description */}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
