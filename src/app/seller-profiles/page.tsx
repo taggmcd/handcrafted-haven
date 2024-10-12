@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Product } from '../../../types'; // Adjust the path according to your structure
 
+
 const CreateProfile = () => {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
