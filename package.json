@@ -9,8 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@heroicons/react": "^2.1.5",
     "bcrypt": "^5.1.1",
+=======
+    "@headlessui/react": "^2.1.9",
+    "@heroicons/react": "^2.1.5",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+>>>>>>> 50c0683a3a3352dea9c1d73c0ae14c61427deeba
     "mongodb": "^6.9.0",
     "next": "14.2.14",
     "next-auth": "5.0.0-beta.22",
