@@ -4,9 +4,11 @@
 
 import React, { useEffect, useState } from 'react';
 
+import { Profile } from '@/app/types/profile'; // Import the Profile type from the types file
+
 const ListProfiles = () => {
     // State to hold the list of seller profiles
-    const [profiles, setProfiles] = useState([]);
+    const [profiles, setProfiles] = useState<Profile[]>([]); // Define the state as an array of Profile objects
 
     // useEffect hook to fetch profiles when the component mounts
     useEffect(() => {
@@ -15,7 +17,7 @@ const ListProfiles = () => {
             // Sending a GET request to the /api/sellerProfiles endpoint
             const response = await fetch('/api/sellerProfiles');
             if (response.ok) { // Check if the response is successful
-                const data = await response.json(); // Parse the JSON data
+                const data: Profile[] = await response.json(); // Parse the JSON data
                 setProfiles(data); // Update the state with the fetched profiles
             } else {
                 console.error('Failed to fetch profiles'); // Log an error message if the fetch fails
