@@ -1,29 +1,15 @@
-import type { Config } from "tailwindcss";
-import typography from "@tailwindcss/typography";
-import aspectRation from "@tailwindcss/aspect-ratio";
+import type { Config } from 'tailwindcss';
 
+/** @type {Config} */
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx}", // Adjust according to your file structure
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        softGrayPurple: "#9F9AA4",
-        blushPink: "#E7CFCD",
-        paleTealGray: "#CFD8D7",
-        desaturatedMint: "#B5C9C3",
-        mutedLavenderPink: "#CAB1BD",
-      },
-    },
+    extend: {},
   },
   plugins: [
-    aspectRation,
-    typography,
+    require('@tailwindcss/typography'),
   ],
 };
 

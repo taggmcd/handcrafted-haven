@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -12,16 +16,26 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "target": "es6", // Ensure this is added to specify the ECMAScript version
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "baseUrl": "src", // Add this line to set the base URL
-    "paths": {
-      "@/*": ["*"] // Update to work with the base URL
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
