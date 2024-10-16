@@ -30,7 +30,11 @@ const ListProfiles = () => {
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
-                const response = await fetch('/api/sellerProfiles');
+                const response = await fetch('/api/sellerProfiles/route', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }});
                 if (response.ok) {
                     const data: Profile[] = await response.json();
                     setProfiles(data);
