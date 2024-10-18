@@ -8,7 +8,6 @@ const SellerProfiles: React.FC = () => {
     const fetchProfiles = async () => {
       const response = await fetch('/api/sellerProfiles');
       const data = await response.json();
-      console.log('Fetched profiles:', data);
       if (Array.isArray(data)) {
         setProfiles(data);
       } else {
@@ -20,13 +19,18 @@ const SellerProfiles: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Seller Profiles</h1>
-      <ul>
-        {profiles.map((profile) => (
-          <li key={profile._id}>{profile.name}</li>
-        ))}
-      </ul>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Seller Profiles</h1>
+        <ul className="space-y-4">
+          {profiles.map((profile) => (
+            <li key={profile._id} className="p-4 bg-gray-50 rounded-md shadow hover:bg-gray-100">
+              <h2 className="text-2xl font-semibold text-gray-800">{profile.name}</h2>
+              <p className="text-gray-600">{profile.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
