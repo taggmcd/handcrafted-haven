@@ -1,8 +1,21 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 
+interface Product {
+  name: string;
+  description: string;
+}
+
+interface Profile {
+  _id: string;
+  name: string;
+  description: string;
+  story: string;
+  products: Product[];
+}
+
 const SellerProfiles: React.FC = () => {
-  const [profiles, setProfiles] = useState<any[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -14,7 +27,7 @@ const SellerProfiles: React.FC = () => {
         console.error('Data is not an array:', data);
       }
     };
-    
+
     fetchProfiles();
   }, []);
 
@@ -45,6 +58,13 @@ const SellerProfiles: React.FC = () => {
               <div>
                 <h2 className="text-2xl font-semibold text-gray-800">{profile.name}</h2>
                 <p className="text-gray-600">{profile.description}</p>
+                <p className="text-gray-600">{profile.story}</p>
+                {profile.products.map((product, idx) => (
+                  <div key={idx}>
+                    <h3 className="text-xl font-medium text-gray-800">{product.name}</h3>
+                    <p className="text-gray-600">{product.description}</p>
+                  </div>
+                ))}
               </div>
               <button
                 onClick={() => handleDelete(profile._id)}
