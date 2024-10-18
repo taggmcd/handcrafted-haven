@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const { db } = await connectToDatabase();
     const sellerProfiles = await db.collection('sellerProfiles').find({}).toArray();
+    console.log('Fetched profiles:', sellerProfiles); // Add this line
     return NextResponse.json(sellerProfiles, { status: 200 });
   } catch (error) {
     console.error('Error in GET /api/sellerProfiles:', error);
