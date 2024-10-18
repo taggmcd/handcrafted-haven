@@ -8,7 +8,12 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', formData);
+    // console.log('Authenticating with:', Object.fromEntries(formData));
+    const user = await signIn('credentials', formData);
+    // console.log('User:', user);
+    // await signIn('credentials', formData);
+    return user;
+    
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -21,3 +26,4 @@ export async function authenticate(
     throw error;
   }
 }
+
