@@ -5,9 +5,11 @@ export async function GET(req: NextRequest) {
   try {
     const { db } = await connectToDatabase();
     const sellerProfiles = await db.collection('sellerProfiles').find({}).toArray();
+    console.log('Fetched from DB:', sellerProfiles);
     return NextResponse.json(sellerProfiles, { status: 200 });
   } catch (error) {
     console.error('Error in GET /api/sellerProfiles/route:', error);
+    console.error('Error details:', error.message);
     return NextResponse.json({ error: 'Error fetching seller profiles' }, { status: 500 });
   }
 }
