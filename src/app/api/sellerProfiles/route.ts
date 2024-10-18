@@ -16,13 +16,11 @@ export async function POST(req: NextRequest) {
   try {
     const { db } = await connectToDatabase();
     const data = await req.json();
-    console.log('Received data:', data);
     const result = await db.collection('sellerProfiles').insertOne(data);
-    console.log('Insert result:', result);
-    return NextResponse.json(result.ops[0], { status: 201 });
+    const insertedDocument = await db.collection('sellerProfiles').findOne({ _id: result.insertedId });
+    return NextResponse.json(insertedDocument, { status: 201 });
   } catch (error) {
     console.error('Error in POST /api/sellerProfiles/route:', error);
-    console.error('Error details:', error.message);
     return NextResponse.json({ error: 'Error creating seller profile' }, { status: 500 });
   }
 }
