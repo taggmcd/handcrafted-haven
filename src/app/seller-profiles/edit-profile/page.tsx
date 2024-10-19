@@ -1,4 +1,4 @@
-"use client";
+"use client"; // This line marks the component as a Client Component
 import React, { useState } from 'react';
 import { Product } from '../../../types'; // Adjust the path according to your structure
 
@@ -6,6 +6,20 @@ const EditProfile: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [story, setStory] = useState<string>('');
   const [products, setProducts] = useState<Product[]>([{ name: '', description: '' }]);
+  const [errors, setErrors] = useState<{ name?: string, story?: string, products?: string[] }>({});
+
+  const validateForm = () => {
+    const newErrors: { name?: string, story?: string, products?: string[] } = {};
+    if (!name) newErrors.name = 'Name is required';
+    if (!story) newErrors.story = 'Story is required';
+    const productErrors = products.map((product) => {
+      if (!product.name || !product.description) return 'Product name and description are required';
+      return '';
+    });
+    if (productErrors.some((error) => error)) newErrors.products = productErrors;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleProductChange = (index: number, field: keyof Product, value: string) => {
     const newProducts = [...products];
@@ -22,6 +36,7 @@ const EditProfile: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!validateForm()) return;
     const response = await fetch('/api/sellerProfiles', {
       method: 'POST',
       headers: {
@@ -51,6 +66,7 @@ const EditProfile: React.FC = () => {
               required
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             />
+            {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
           </div>
           <div>
             <label htmlFor="story" className="block text-sm font-medium text-gray-700">Your Story</label>
@@ -61,6 +77,7 @@ const EditProfile: React.FC = () => {
               required
               className="mt-1 block w-full p-2 border border-gray-300 rounded"
             ></textarea>
+            {errors.story && <p className="text-red-500 text-xs mt-1">{errors.story}</p>}
           </div>
           <div>
             <h2 className="text-lg font-medium text-gray-700">Products</h2>
@@ -79,6 +96,7 @@ const EditProfile: React.FC = () => {
                   onChange={(e) => handleProductChange(index, 'description', e.target.value)}
                   className="mt-1 block w-full p-2 border border-gray-300 rounded"
                 ></textarea>
+                {errors.products && errors.products[index] && <p className="text-red-500 text-xs mt-1">{errors.products[index]}</p>}
               </div>
             ))}
             <button
