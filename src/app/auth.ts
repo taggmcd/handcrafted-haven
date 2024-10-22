@@ -6,6 +6,7 @@ import clientPromise from '@/app/lib/mongodb';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import { WithId, Document } from 'mongodb'; // Tipos do MongoDB
+// import { hash } from 'crypto';
  
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -41,9 +42,15 @@ export const { auth, signIn, signOut } = NextAuth({
  
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
+          // const hashedPassword = await bcrypt.hash(password, 10);
+          // console.log('Hash Password:', hashedPassword);
+
           const user = await getUser(email);
+          // console.log('User:', user);
+
           if (!user) return null;
           const passwordsMatch = await bcrypt.compare(password, user.password);
+          // console.log('Passwords match:', passwordsMatch);
  
           if (passwordsMatch) return user;
         }
