@@ -1,4 +1,6 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
+import aspectRatio from "@tailwindcss/aspect-ratio"; // Corrected import
 
 /** @type {Config} */
 const config: Config = {
@@ -10,6 +12,8 @@ const config: Config = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    aspectRatio,
+    typography,
   ],
 };
 
