@@ -27,24 +27,24 @@ const SellerProfiles: React.FC = () => {
         console.error('Data is not an array:', data);
       }
     };
-    
+
     fetchProfiles();
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-beige-100 p-4">
       <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Seller Profiles</h1>
+        <h1 className="text-3xl font-bold text-center text-forest-green-800 mb-6">Seller Profiles</h1>
         <ul className="space-y-4">
           {profiles.map((profile) => (
-            <li key={profile._id} className="p-4 bg-gray-50 rounded-md shadow hover:bg-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-800">{profile.name}</h2>
-              <p className="text-gray-600">{profile.description}</p>
-              <p className="text-gray-600">{profile.story}</p>
+            <li key={profile._id} className="p-4 bg-beige-50 rounded-md shadow hover:bg-beige-100">
+              <h2 className="text-2xl font-semibold text-forest-green-800">{profile.name}</h2>
+              <p className="text-brown-600">{profile.description}</p>
+              <p className="text-brown-600">{profile.story}</p>
               {profile.products.map((product, idx) => (
                 <div key={idx}>
-                  <h3 className="text-xl font-medium text-gray-800">{product.name}</h3>
-                  <p className="text-gray-600">{product.description}</p>
+                  <h3 className="text-xl font-medium text-forest-green-800">{product.name}</h3>
+                  <p className="text-brown-600">{product.description}</p>
                 </div>
               ))}
             </li>

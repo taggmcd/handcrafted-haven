@@ -1,10 +1,10 @@
-.container {
+.profile-container {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   
-  .card {
+  .profile-card {
     border: 1px solid #654321; /* Brown border */
     padding: 10px;
     border-radius: 8px;
@@ -12,39 +12,37 @@
     transition: transform 0.2s;
   }
   
-  .card:hover {
+  .profile-card:hover {
     transform: scale(1.05);
   }
   
-  .image {
+  .profile-image {
     width: 100%;
     height: auto;
     border-radius: 8px;
   }
   
-  .details {
+  .profile-details {
     padding: 10px;
   }
   
-  .title {
+  .profile-name {
     font-size: 1.5rem;
     margin: 10px 0;
     color: #003300; /* Forest green */
   }
   
-  .description {
+  .profile-description {
     font-size: 1rem;
     color: #654321; /* Brown */
   }
   
-  .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #003300; /* Forest green */
+  .profile-story {
+    font-size: 1rem;
+    color: #654321; /* Brown */
   }
   
-  .link {
+  .profile-link {
     display: inline-block;
     padding: 8px 12px;
     background-color: #006400; /* Deep green */
@@ -54,7 +52,7 @@
     transition: background-color 0.2s;
   }
   
-  .link:hover {
+  .profile-link:hover {
     background-color: #004d00; /* Darker green */
   }
   

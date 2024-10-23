@@ -39,43 +39,43 @@ const CreateProfile: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-2xl p-6 bg-blushPink rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-center text-black">Create Seller Profile</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-beige-100">
+      <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold text-center text-forest-green-800">Create Seller Profile</h1>
         <form onSubmit={handleSubmit} className="mt-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-black">Name:</label>
+            <label htmlFor="name" className="block text-sm font-medium text-forest-green-800">Name:</label>
             <input
               type="text"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              className="mt-1 block w-full p-2 border border-brown-600 rounded"
             />
           </div>
           <div className="mt-4">
-            <label htmlFor="description" className="block text-sm font-medium text-black">Description:</label>
+            <label htmlFor="description" className="block text-sm font-medium text-forest-green-800">Description:</label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              className="mt-1 block w-full p-2 border border-brown-600 rounded"
             ></textarea>
           </div>
           <div className="mt-4">
-            <label htmlFor="story" className="block text-sm font-medium text-black">Your Story:</label>
+            <label htmlFor="story" className="block text-sm font-medium text-forest-green-800">Your Story:</label>
             <textarea
               id="story"
               value={story}
               onChange={(e) => setStory(e.target.value)}
               required
-              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              className="mt-1 block w-full p-2 border border-brown-600 rounded"
             ></textarea>
           </div>
           <div className="mt-4">
-            <h2 className="text-lg font-medium text-black">Products:</h2>
+            <h2 className="text-lg font-medium text-forest-green-800">Products:</h2>
             {products.map((product, index) => (
               <div key={index} className="mt-2">
                 <input
@@ -83,14 +83,14 @@ const CreateProfile: React.FC = () => {
                   placeholder="Product Name"
                   value={product.name}
                   onChange={(e) => handleProductChange(index, 'name', e.target.value)}
-                  className="block w-full p-2 border border-gray-300 rounded"
+                  className="block w-full p-2 border border-brown-600 rounded"
                   required
                 />
                 <textarea
                   placeholder="Product Description"
                   value={product.description}
                   onChange={(e) => handleProductChange(index, 'description', e.target.value)}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                  className="mt-1 block w-full p-2 border border-brown-600 rounded"
                   required
                 ></textarea>
               </div>
@@ -98,12 +98,12 @@ const CreateProfile: React.FC = () => {
             <button
               type="button"
               onClick={addProduct}
-              className="mt-2 px-4 py-2 text-white bg-deepBlue rounded hover:bg-darkBlue"
+              className="mt-2 px-4 py-2 text-white bg-forest-green-800 rounded hover:bg-forest-green-700"
             >
               Add Another Product
             </button>
           </div>
-          <button type="submit" className="mt-4 w-full px-4 py-2 text-white bg-brightGreen rounded hover:bg-deepGreen">
+          <button type="submit" className="mt-4 w-full px-4 py-2 text-white bg-forest-green-800 rounded hover:bg-forest-green-700">
             Create Profile
           </button>
         </form>

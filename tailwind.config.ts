@@ -1,19 +1,24 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
-import aspectRatio from "@tailwindcss/aspect-ratio"; // Corrected import
+import aspectRatio from "@tailwindcss/aspect-ratio";
 
-/** @type {Config} */
 const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}", // Adjust according to your file structure
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'beige-100': '#f5f5dc',
+        'beige-50': '#fafaf0',
+        'forest-green-800': '#003300',
+        'brown-600': '#654321',
+      },
+    },
   },
   plugins: [
-    require('@tailwindcss/typography'),
-    aspectRatio,
     typography,
+    aspectRatio,
   ],
 };
 
