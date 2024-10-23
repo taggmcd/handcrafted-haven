@@ -19,9 +19,15 @@
     "target": "es6",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"],
-      "@tailwindcss/typography": ["node_modules/@tailwindcss/typography"],
-      "@tailwindcss/aspect-ratio": ["node_modules/@tailwindcss/aspect-ratio"]
+      "@/*": [
+        "*"
+      ],
+      "@tailwindcss/typography": [
+        "node_modules/@tailwindcss/typography"
+      ],
+      "@tailwindcss/aspect-ratio": [
+        "node_modules/@tailwindcss/aspect-ratio"
+      ]
     },
     "plugins": [
       {
