@@ -16,12 +16,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "target": "es6", // Ensure this is added to specify the ECMAScript version
+    "target": "es6",
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ]
+      "@/*": ["*"],
+      "@tailwindcss/typography": ["node_modules/@tailwindcss/typography"],
+      "@tailwindcss/aspect-ratio": ["node_modules/@tailwindcss/aspect-ratio"]
     },
     "plugins": [
       {
