@@ -6,8 +6,7 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-// import { Button } from '@/app/ui/button';
+import { Button } from '@/app/ui/button';
 import { useState, useEffect } from 'react'; // Import useState to manage state
 import { authenticate } from '@/app/lib/actions'; // Import your authenticate function
 import { useRouter, useSearchParams } from 'next/navigation'; // Import useRouter for redirection
@@ -102,15 +101,13 @@ function LoginFormComponent() {
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md flex items-center justify-center"
-          disabled={isPending}
-        >
-          {isPending ? 'Logging in...' : 'Log in'}
-          <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </button>
-        <div className="text-center">
+        <div className='flex justify-between items-center mt-4'>
+          <Button type="submit">
+            {isPending ? 'Logging in...' : 'Log in'}
+          </Button>
+        </div>
+
+        <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
             Don&apos;t have an account?{' '}
             <a
@@ -122,7 +119,7 @@ function LoginFormComponent() {
           </p>
         </div>
         <div 
-          className="flex h-8 items-end space-x-1"
+          className="flex h-8 items-end space-x-1 mt-4"
           aria-live="polite"
           aria-atomic="true"
         >            
