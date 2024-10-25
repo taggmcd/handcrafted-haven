@@ -12,6 +12,7 @@ export default async function ReviewsTable({
   productId: string;
   currentPage: number;
 }) {
+<<<<<<< HEAD
   // console.log('ReviewsTable');
   // console.log('query', query);
   // console.log('productId', productId);
@@ -19,6 +20,15 @@ export default async function ReviewsTable({
 
   const reviews = await fetchFilteredReviews(query, productId, currentPage);
   // console.log('reviews', reviews);
+=======
+  console.log('ReviewsTable');
+  console.log('query', query);
+  console.log('productId', productId);
+  console.log('currentPage', currentPage);
+
+  const reviews = await fetchFilteredReviews(query, productId, currentPage);
+  console.log('reviews', reviews);
+>>>>>>> 88765da0372620b93e037b5d20ddd359be07e060
 
   return (
     <div className="mt-6 flow-root">
