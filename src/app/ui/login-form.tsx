@@ -7,16 +7,25 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from '@/app/ui/button';
-import { useState } from 'react'; // Import useState to manage state
+// import { Button } from '@/app/ui/button';
+import { useState, useEffect } from 'react'; // Import useState to manage state
 import { authenticate } from '@/app/lib/actions'; // Import your authenticate function
-import { useRouter } from 'next/navigation'; // Import useRouter for redirection
+import { useRouter, useSearchParams } from 'next/navigation'; // Import useRouter for redirection
+import { Suspense } from 'react'; // Import Suspense
 
-export default function LoginForm() {
+function LoginFormComponent() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // State for error message
   const [isPending, setIsPending] = useState(false); // State for pending status
-  const [prevState, setPrevState] = useState<string | undefined>(undefined); // State to track the previous state
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // State for authentication status
   const router = useRouter(); // Initialize the router hook for redirection
+  const searchParams = useSearchParams(); // Initialize the searchParams hook
+  const returnUrl = searchParams.get('returnUrl') || '/'; // Get the returnUrl from the searchParams
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push(returnUrl); // Redirect to the original URL after successful login
+    }
+  }, [isAuthenticated, returnUrl, router]);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default form submission
@@ -26,8 +35,8 @@ export default function LoginForm() {
     console.log('Form data:', Object.fromEntries(formData)); // Log form data
 
     try {
-      // Call authenticate, passing the prevState and formData
-      const result = await authenticate(prevState, formData);
+      // Call authenticate, passing formData
+      const result = await authenticate(formData);
       console.log('Result:', result);
 
       if (typeof result === 'string') {
@@ -36,13 +45,11 @@ export default function LoginForm() {
         // Handle successful authentication (e.g., redirect, update state, etc.)
         setErrorMessage(null); // Clear any previous error messages
         console.log('Authenticated successfully:', result);
-        router.push('/'); // Redirect to the root route upon successful authentication
+        setIsAuthenticated(true); // Set authentication status to true
       }
-
-      setPrevState(result); // Update the prevState if needed
     } catch (error) {
       console.error('Failed to authenticate:', error); // Log any errors
-      setErrorMessage('Something went wrong. Please try again.');
+      setErrorMessage('Failed to login'); // Set error message on failure
     } finally {
       setIsPending(false); // Reset pending state
     }
@@ -71,7 +78,6 @@ export default function LoginForm() {
                 placeholder="Enter your email address"
                 required
               />
-
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
@@ -96,9 +102,14 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
+        <button
+          type="submit"
+          className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md flex items-center justify-center"
+          disabled={isPending}
+        >
+          {isPending ? 'Logging in...' : 'Log in'}
+          <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        </button>
         <div className="text-center">
           <p className="text-sm text-gray-600">
             Don&apos;t have an account?{' '}
@@ -110,7 +121,6 @@ export default function LoginForm() {
             </a>
           </p>
         </div>
-
         <div 
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
@@ -125,5 +135,13 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+  );
+}
+
+export default function LoginForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginFormComponent />
+    </Suspense>
   );
 }

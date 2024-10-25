@@ -12,13 +12,13 @@ export default async function ReviewsTable({
   productId: string;
   currentPage: number;
 }) {
-  console.log('ReviewsTable');
-  console.log('query', query);
-  console.log('productId', productId);
-  console.log('currentPage', currentPage);
+  // console.log('ReviewsTable');
+  // console.log('query', query);
+  // console.log('productId', productId);
+  // console.log('currentPage', currentPage);
 
   const reviews = await fetchFilteredReviews(query, productId, currentPage);
-  console.log('reviews', reviews);
+  // console.log('reviews', reviews);
 
   return (
     <div className="mt-6 flow-root">

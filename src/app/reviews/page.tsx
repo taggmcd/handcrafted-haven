@@ -25,9 +25,9 @@ export default async function Page({
   const productId = searchParams?.productId || '';
   const currentPage = Number(searchParams?.page) || 1;
 
-  console.log('query', query);
-  console.log('productId', productId);
-  console.log('currentPage', currentPage);
+  // console.log('query', query);
+  // console.log('productId', productId);
+  // console.log('currentPage', currentPage);
   
   const totalPages = await fetchReviewsPages(query, productId);
 

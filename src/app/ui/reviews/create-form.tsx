@@ -8,7 +8,7 @@ import { roboto } from '@/app/ui/fonts';
 import StarRatingInput from './StarRatingInput';
 
 
-export default function Form({ user_id, product_id }: { user_id: string, product_id: string }) {
+export default function Form({ product_id }: { product_id: string }) {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export default function Form({ user_id, product_id }: { user_id: string, product
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user_id, product_id, rating, comment }),
+        body: JSON.stringify({ product_id, rating, comment }),
       });
 
       if (!response.ok) {
@@ -45,8 +45,7 @@ export default function Form({ user_id, product_id }: { user_id: string, product
   return (
     <form onSubmit={handleSubmit} className=''>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
-        {/* Hidden Fields for user_id and product_id */}
-        <input type="hidden" name="user_id" value={user_id} />
+        {/* Hidden Fields for product_id */}
         <input type="hidden" name="product_id" value={product_id} />
         <div className="flex w-full items-center justify-between">
           <h1 className={`${roboto.className} text-2xl`}>Add a Review</h1>

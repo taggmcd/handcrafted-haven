@@ -1,10 +1,18 @@
 // src/app/api/reviews/route.ts
 import { NextResponse } from 'next/server';
 import clientPromise from '@/app/lib/mongodb';
+import { getToken } from 'next-auth/jwt';
+
 
 export async function POST(req: Request) {
-  const { user_id, product_id, rating, comment } = await req.json();
-  console.log('Creating review:', { user_id, product_id, rating, comment });
+  const { product_id, rating, comment } = await req.json();
+  console.log('Creating review:', { product_id, rating, comment });
+
+  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const user_id = token.id;
 
   try {
     const client = await clientPromise;
