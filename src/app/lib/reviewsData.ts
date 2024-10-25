@@ -6,10 +6,10 @@ export async function fetchFilteredReviews(query: string, productId: string, cur
     try {
         const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-        console.log('Query:', query);
-        console.log('Product ID:', productId);
-        console.log('Current Page:', currentPage);
-        console.log('Offset:', offset);
+        // console.log('Query:', query);
+        // console.log('Product ID:', productId);
+        // console.log('Current Page:', currentPage);
+        // console.log('Offset:', offset);
 
         const client = await clientPromise;
         const db = client.db('yourDatabaseName'); // Substitua pelo nome correto do banco

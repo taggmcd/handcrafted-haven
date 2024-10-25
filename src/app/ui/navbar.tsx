@@ -5,15 +5,9 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-<<<<<<< HEAD
-  { name: 'Shop', href: '#' },
-  { name: 'Latest Products', href: '#' },
-  { name: 'Marketplace', href: '#' },
-=======
   { name: 'Shop', href: '/' },
   { name: 'Latest Products', href: '/latest' },
   { name: 'Sellers', href: '/sellers' },
->>>>>>> 88765da0372620b93e037b5d20ddd359be07e060
 ]
 
 export default function Navbar() {
@@ -23,11 +17,7 @@ export default function Navbar() {
     <header className="bg-white">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-<<<<<<< HEAD
-          <a href="#">
-=======
           <a href="/">
->>>>>>> 88765da0372620b93e037b5d20ddd359be07e060
             <span className="text-blue-500">Handcrafted Haven</span>
                       </a>
         </div>
@@ -49,11 +39,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-<<<<<<< HEAD
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-=======
           <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
->>>>>>> 88765da0372620b93e037b5d20ddd359be07e060
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>

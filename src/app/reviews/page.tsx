@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Pagination from '@/app/ui/reviews/pagination';
 // import Search from '@/app/ui/search';
 import Table from '@/app/ui/reviews/table';
@@ -6,6 +7,9 @@ import { roboto } from '@/app/ui/fonts';
 // import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 // import { Suspense } from 'react';
 import { fetchReviewsPages } from '@/app/lib/reviewsData';
+import { fetchProductName } from '@/app/lib/productData';
+
+import { Button } from '@/app/ui/button'; // Certifique-se de importar o componente Button
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -21,28 +25,33 @@ export default async function Page({
     page?: string;
   };
 }) {
+
   const query = searchParams?.query || '';
   const productId = searchParams?.productId || '';
   const currentPage = Number(searchParams?.page) || 1;
 
-  // console.log('query', query);
-  // console.log('productId', productId);
-  // console.log('currentPage', currentPage);
-  
-  const totalPages = await fetchReviewsPages(query, productId);
+  if (!productId) {
+    console.error('Product ID is required');
+    return;
+  }
+
+  const productName = await fetchProductName(productId);
+  const totalPages = await fetchReviewsPages(query, productId); 
 
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${roboto.className} text-2xl`}>Reviews</h1>
+    <div className="w-full min-h-screen bg-gray-100 text-gray-900">
+      <div className="flex items-center justify-between px-4 py-6 h-10">
+        <h1 className={`${roboto.className} text-2xl`}>Reviews for {productName}</h1>
+        <Link href={`/reviews/create?productId=${productId}`}>
+          <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+            Add Review
+          </Button>
+        </Link>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        {/* <Search placeholder="Search invoices..." /> */}
-        {/* <CreateInvoice /> */}
+        {/* Componentes de busca ou ações adicionais */}
       </div>
-      {/* <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}> */}
-        <Table query={query} currentPage={currentPage} productId={productId} />
-      {/* </Suspense> */}
+      <Table query={query} currentPage={currentPage} productId={productId} />
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
       </div>

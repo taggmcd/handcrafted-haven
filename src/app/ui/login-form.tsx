@@ -32,19 +32,19 @@ function LoginFormComponent() {
     setIsPending(true); // Set pending state to true while authenticating
 
     const formData = new FormData(event.currentTarget); // Collect form data
-    console.log('Form data:', Object.fromEntries(formData)); // Log form data
+    // console.log('Form data:', Object.fromEntries(formData)); // Log form data
 
     try {
       // Call authenticate, passing formData
       const result = await authenticate(formData);
-      console.log('Result:', result);
+      // console.log('Result:', result);
 
       if (typeof result === 'string') {
         setErrorMessage(result); // Set error message if authentication fails
       } else {
         // Handle successful authentication (e.g., redirect, update state, etc.)
         setErrorMessage(null); // Clear any previous error messages
-        console.log('Authenticated successfully:', result);
+        // console.log('Authenticated successfully:', result);
         setIsAuthenticated(true); // Set authentication status to true
       }
     } catch (error) {
