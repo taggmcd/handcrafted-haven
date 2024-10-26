@@ -35,7 +35,7 @@ export default async function ReviewsTable({
                     <div className="mb-2 flex items-center">
                       <p>{review.comment}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{review.rating}</p>
+                    <p className="text-sm text-gray-500"><StarRating rating={review.rating} /></p>
                   </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">

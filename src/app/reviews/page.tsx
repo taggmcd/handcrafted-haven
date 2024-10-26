@@ -8,9 +8,11 @@ import { roboto } from '@/app/ui/fonts';
 // import { Suspense } from 'react';
 import { fetchReviewsPages } from '@/app/lib/reviewsData';
 import { fetchProductName } from '@/app/lib/productData';
+import { fetchReviewsRatingAverage } from '@/app/lib/reviewsData';
 
 import { Button } from '@/app/ui/button'; // Certifique-se de importar o componente Button
 import { Metadata } from 'next';
+import StarRating from '@/app/ui/reviews/StarRating'; 
 
 export const metadata: Metadata = {
   title: 'Reviews',
@@ -36,7 +38,14 @@ export default async function Page({
   }
 
   const productName = await fetchProductName(productId);
-  const totalPages = await fetchReviewsPages(query, productId); 
+  const totalPages = await fetchReviewsPages(query, productId);
+  // const ratingAverage = await fetchReviewsRatingAverage(productId); 
+  const { averageRating } = await fetchReviewsRatingAverage(productId);
+  // const { averageRating, totalRatings, sumRatings } = await fetchReviewsRatingAverage(productId);
+  // console.log(`Average Rating: ${averageRating}`);
+  // console.log(`Total Ratings: ${totalRatings}`);
+  // console.log(`Sum of Ratings: ${sumRatings}`);
+
 
   return (
     <div className="w-full min-h-screen bg-gray-100 text-gray-900">
@@ -47,6 +56,10 @@ export default async function Page({
             Add Review
           </Button>
         </Link>
+      </div>
+      <div className="mt-2 flex items-center px-4 py-6">
+        <StarRating rating={averageRating} />
+        <span className="ml-2 text-lg">average {averageRating.toFixed(1)}</span>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         {/* Componentes de busca ou ações adicionais */}
