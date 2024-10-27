@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <>
-      <ProductFilter />
+      <ProductFilter categories={categories}/>
       {loading && <p>Loading Products...</p>}
       <ProductList products={products}/>
 
