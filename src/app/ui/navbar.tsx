@@ -54,7 +54,7 @@ export default function Navbar() {
                 alt=""
                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
-              />
+              /> 
             </a>
             <button
               type="button"

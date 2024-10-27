@@ -81,7 +81,6 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
         />
 
         <div className="fixed inset-0 z-40 flex">
-          {categories}
           <DialogPanel
             transition
             className="relative ml-auto flex h-full w-full max-w-xs transform flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl transition duration-300 ease-in-out data-[closed]:translate-x-full"
@@ -146,6 +145,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
           <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
             Thoughtfully designed objects for the workspace, home, and travel.
+            {categories}
           </p>
         </div>
 

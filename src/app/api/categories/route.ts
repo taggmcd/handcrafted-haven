@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Product from '../../models/Product'; // Adjust the import path
+import Product from '../../models/Product';
 
 // Function to get unique categories
 const getUniqueCategories = async () => {
