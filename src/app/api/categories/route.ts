@@ -4,7 +4,9 @@ import Product from '../../models/Product';
 // Function to get unique categories
 const getUniqueCategories = async () => {
   try {
+    console.log('Fetching unique categories...');
     const categories = await Product.distinct('category');
+    console.log('Fetched categories:', categories);
     return categories;
   } catch (error) {
     console.error('Error fetching categories:', error);
