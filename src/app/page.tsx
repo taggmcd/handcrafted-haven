@@ -10,7 +10,6 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
 
     const [categories, setCategories] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
   
     const fetchProducts = async (page: number) => {
       setLoading(true);
@@ -22,18 +21,13 @@ export default function Home() {
     };
     
     const fetchCategories = async () => {
-      try {
         const response = await fetch('/api/categories');
         if (!response.ok) {
           throw new Error('Failed to fetch categories');
         }
         const data = await response.json();
         setCategories(data); // Assuming data is an array of categories
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+
     };
 
     console.log(categories);

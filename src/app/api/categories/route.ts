@@ -18,6 +18,6 @@ export async function GET() {
     const categories = await getUniqueCategories();
     return NextResponse.json(categories); // Send JSON response with unique categories
   } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    return NextResponse.json({ message: error.message }, { status: 500 }); {} // eslint-disable-line
   }
 }
