@@ -30,7 +30,6 @@ export default function Home() {
 
     };
 
-    console.log(categories);
     useEffect(() => {
       fetchProducts(page);
     }, [page]);
