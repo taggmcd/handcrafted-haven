@@ -5,9 +5,9 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Shop', href: '#' },
-  { name: 'Latest Products', href: '#' },
-  { name: 'Marketplace', href: '#' },
+  { name: 'Shop', href: '/' },
+  { name: 'Latest Products', href: '/latest' },
+  { name: 'Sellers', href: '/sellers' },
 ]
 
 export default function Navbar() {
@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="bg-white">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#">
+          <a href="/">
             <span className="text-blue-500">Handcrafted Haven</span>
                       </a>
         </div>
@@ -39,7 +39,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="/login" className="text-sm font-semibold leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>

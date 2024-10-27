@@ -14,6 +14,16 @@
     "@heroicons/react": "^2.1.5",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.15",
+    "bcrypt": "^5.1.1",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.2",
+    "next": "14.2.14",
+    "next-auth": "5.0.0-beta.22",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/tailwindcss": "^3.1.0",
