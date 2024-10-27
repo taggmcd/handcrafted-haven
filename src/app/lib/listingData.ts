@@ -1,21 +1,32 @@
-import Listing from '../models/Product';
+import Product from '../models/Product';
 
-export async function getPaginatedListings (page: number, limit: number) {
+export async function getPaginatedProducts (page: number, limit: number) {
   const skip = (page - 1) * limit;
-  const listings = await Listing.find()
+  const products = await Product.find()
     .skip(skip)
     .limit(limit)
     .exec();
 
-  const totalCount = await Listing.countDocuments();
+  const totalCount = await Product.countDocuments();
   const totalPages = Math.ceil(totalCount / limit);
 
   return {
-    listings,
+    products,
     totalCount,
     totalPages,
     currentPage: page,
   };
+};
+
+// Get all the categories
+export const getUniqueCategories = async () => {
+  try {
+    const categories = await Product.distinct('category');
+    console.log('Unique Categories:', categories);
+    return categories;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+  }
 };
 
 // validate the submited data and save it to the database
