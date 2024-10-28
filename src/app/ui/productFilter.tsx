@@ -64,7 +64,11 @@ const filters = [
   },
 ]
 
-export default function ProductFilter() {
+interface ProductFilterProps {
+  categories: React.ReactNode;
+}
+
+export default function ProductFilter({ categories }: ProductFilterProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -141,6 +145,7 @@ export default function ProductFilter() {
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
           <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
             Thoughtfully designed objects for the workspace, home, and travel.
+            {categories}
           </p>
         </div>
 
