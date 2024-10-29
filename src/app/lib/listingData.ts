@@ -9,6 +9,7 @@ export async function getPaginatedProducts (page: number, limit: number) {
 
   const totalCount = await Product.countDocuments();
   const totalPages = Math.ceil(totalCount / limit);
+  console.log('Fetched Products from DB:', products); // Log fetched products
 
   return {
     products,

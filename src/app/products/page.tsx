@@ -1,28 +1,27 @@
 "use client";
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // Ensure these imports are here
 import Link from 'next/link';
 import styles from './Products.module.css';
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  imageUrl: string;
-}
+// interface Product {
+//   id: string;
+//   name: string;
+//   description: string;
+//   price: number;
+//   category: string;
+//   imageUrl: string;
+// }
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch('/api/products');
       const data = await response.json();
-      setProducts(data);
+      console.log('Fetched Products:', data); //This one is logging
+      setProducts(data.products); // Adjust according to the response structure
     };
-
     fetchProducts();
   }, []);
 
