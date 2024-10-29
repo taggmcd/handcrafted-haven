@@ -1,0 +1,60 @@
+.container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .card {
+    border: 1px solid #654321; /* Brown border */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .details {
+    padding: 10px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #003300; /* Forest green */
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #654321; /* Brown */
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #003300; /* Forest green */
+  }
+  
+  .link {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #006400; /* Deep green */
+    color: #f5f5dc; /* Beige */
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  
+  .link:hover {
+    background-color: #004d00; /* Darker green */
+  }
+  
