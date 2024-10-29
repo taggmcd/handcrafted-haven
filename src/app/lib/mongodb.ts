@@ -6,14 +6,12 @@ if (!uri) {
 }
 
 let client: MongoClient | null = null;
-let clientPromise: Promise<MongoClient>;
+const clientPromise: Promise<MongoClient> = global._mongoClientPromise;
 
 if (!global._mongoClientPromise) {
   client = new MongoClient(uri);
   global._mongoClientPromise = client.connect();
 }
-
-clientPromise = global._mongoClientPromise;
 
 export async function connectToDatabase() {
   try {
@@ -25,3 +23,5 @@ export async function connectToDatabase() {
     throw new Error('Could not connect to database');
   }
 }
+
+export default clientPromise;
