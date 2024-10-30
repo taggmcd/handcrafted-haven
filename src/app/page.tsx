@@ -25,15 +25,15 @@ export default function Home() {
   return (
     <>
       <ProductFilter />
-      {loading && <p>Loading Products...</p>}
+      {loading && <p className="bg-white text-center text-bold text-black text-2xl pt-10">Loading Products...</p>}
       <ProductList products={products}/>
 
       
      
-      <div>
-        <button disabled={page <= 1} onClick={() => setPage((prev) => prev - 1)}>Previous</button>
+      <div className='text-center bg-white text-black'>
+        <button disabled={page <= 1} onClick={() => setPage((prev) => prev - 1)} className="underline hover:text-blue-500">Previous</button>
         <span> Page {page} of {totalPages} </span>
-        <button disabled={page >= totalPages} onClick={() => setPage((prev) => prev + 1)}>Next</button>
+        <button className="underline hover:text-blue-500" disabled={page >= totalPages} onClick={() => setPage((prev) => prev + 1)}>Next</button>
       </div>
     </>
   );
