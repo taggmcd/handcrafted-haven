@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'; // Ensure these imports are 
 import Link from 'next/link';
 import styles from './Products.module.css';
 
-// interface Product {
-//   id: string;
-//   name: string;
-//   description: string;
-//   price: number;
-//   category: string;
-//   imageUrl: string;
-// }
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  imageUrl: string;
+}
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -28,7 +28,7 @@ const Products = () => {
   return (
     <div className={styles.container}>
       {products.length > 0 ? (
-        products.map((product) => (
+        products.map((product: Product) => (
           <div key={product.id} className={styles.card}>
             <img src={product.imageUrl} alt={product.name} className={styles.image} />
             <div className={styles.details}>

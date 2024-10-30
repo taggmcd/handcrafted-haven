@@ -18,7 +18,8 @@ function LoginFormComponent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // State for authentication status
   const router = useRouter(); // Initialize the router hook for redirection
   const searchParams = useSearchParams(); // Initialize the searchParams hook
-  const returnUrl = searchParams.get('returnUrl') || '/'; // Get the returnUrl from the searchParams
+  // const returnUrl = searchParams.get('returnUrl') || '/'; // Get the returnUrl from the searchParams
+  const returnUrl = searchParams ? searchParams.get('returnUrl') || '/' : '/'; // Get the returnUrl from the searchParams
 
   useEffect(() => {
     if (isAuthenticated) {
