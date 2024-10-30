@@ -1,4 +1,4 @@
-import clientPromise from '@/app/lib/mongodb';
+import { connectToDatabase } from '@/app/lib/mongodb';
 
 const ITEMS_PER_PAGE = 4;
 
@@ -11,8 +11,7 @@ export async function fetchFilteredReviews(query: string, productId: string, cur
         // console.log('Current Page:', currentPage);
         // console.log('Offset:', offset);
 
-        const client = await clientPromise;
-        const db = client.db('yourDatabaseName'); // Substitua pelo nome correto do banco
+        const { db } = await connectToDatabase();
 
         const aggregation = [
             {
@@ -92,8 +91,7 @@ export async function fetchFilteredReviews(query: string, productId: string, cur
 
 export async function fetchReviewsPages(query: string, productId: string) {
     try {
-        const client = await clientPromise;
-        const db = client.db('yourDatabaseName'); // Substitua pelo nome correto do banco
+        const { db } = await connectToDatabase();
 
         const countAggregation = [
             {
@@ -125,8 +123,7 @@ export async function fetchReviewsPages(query: string, productId: string) {
 
 export async function fetchReviewsRatingAverage(productId: string): Promise<{ averageRating: number, totalRatings: number, sumRatings: number }> {
     try {
-        const client = await clientPromise;
-        const db = client.db('yourDatabaseName'); // Substitua pelo nome correto do banco
+        const { db } = await connectToDatabase();
 
         // console.log('Product ID:', productId);
 

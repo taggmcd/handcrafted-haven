@@ -2,15 +2,14 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from '@/auth.config';
 import { z } from 'zod';
-import clientPromise from '@/app/lib/mongodb';
+import { connectToDatabase } from '@/app/lib/mongodb';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import { WithId, Document } from 'mongodb'; // Tipos do MongoDB
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
-    const client = await clientPromise;
-    const db = client.db('yourDatabaseName'); // Change to your database name
+    const { db } = await connectToDatabase();
     const user = await db.collection('users').findOne<WithId<Document>>({ email: email });
     
     if (!user) {
