@@ -8,8 +8,6 @@ export default function Home() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
-
-    const [categories, setCategories] = useState<string[]>([]);
   
     const fetchProducts = async (page: number) => {
       setLoading(true);
@@ -19,28 +17,14 @@ export default function Home() {
       setTotalPages(data.totalPages);
       setLoading(false);
     };
-    
-    const fetchCategories = async () => {
-        const response = await fetch('/api/categories');
-        if (!response.ok) {
-          throw new Error('Failed to fetch categories');
-        }
-        const data = await response.json();
-        setCategories(data); // Assuming data is an array of categories
-
-    };
 
     useEffect(() => {
       fetchProducts(page);
     }, [page]);
 
-    useEffect(() => {
-      fetchCategories();
-    }, []);
-
   return (
     <>
-      <ProductFilter categories={categories}/>
+      <ProductFilter />
       {loading && <p>Loading Products...</p>}
       <ProductList products={products}/>
 
