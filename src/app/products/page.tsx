@@ -5,7 +5,7 @@ import StarRating from '@/app/ui/reviews/StarRating'; // Ensure correct import p
 import styles from './Products.module.css';
 
 interface Product {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   price: number;
@@ -37,14 +37,14 @@ const Products = () => {
     <div className={styles.container}>
       {products.length > 0 ? (
         products.map((product: Product) => (
-          <div key={product.id} className={styles.card}>
+          <div key={product._id} className={styles.card}>
             <img src={product.imageUrl} alt={product.name} className={styles.image} />
             <div className={styles.details}>
               <h2 className={styles.title}>{product.name}</h2>
               <p className={styles.description}>{product.description}</p>
               <p className={styles.price}>Price: ${product.price}</p>
               <StarRating rating={Math.round(calculateAverageRating(product.ratings))} />
-              <Link href={`/products/${product.id}`}>
+              <Link href={`/products/${product._id}`}>
                 <span className={styles.link}>View Product</span>
               </Link>
             </div>
