@@ -21,45 +21,18 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#' },
-  { name: 'Best Rating', href: '#' },
+  { name: 'Price Highest First', href: '#' },
+  { name: 'Price Lowest First', href: '#' },
   { name: 'Newest', href: '#' },
 ]
 const filters = [
   {
-    id: 'category',
-    name: 'Category',
+    id: 'price',
+    name: 'Price',
     options: [
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'hats', label: 'Hats' },
-    ],
-  },
-  {
-    id: 'brand',
-    name: 'Brand',
-    options: [
-      { value: 'clothing-company', label: 'Clothing Company' },
-      { value: 'fashion-inc', label: 'Fashion Inc.' },
-      { value: 'shoes-n-more', label: "Shoes 'n More" },
-    ],
-  },
-  {
-    id: 'color',
-    name: 'Color',
-    options: [
-      { value: 'white', label: 'White' },
-      { value: 'black', label: 'Black' },
-      { value: 'grey', label: 'Grey' },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Sizes',
-    options: [
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
+      { value: 'under10', label: '<$10' },
+      { value: 'tentwenty', label: '$10-20' },
+      { value: 'over20', label: '>$20' },
     ],
   },
 ]
@@ -68,7 +41,7 @@ interface ProductFilterProps {
   categories: React.ReactNode;
 }
 
-export default function ProductFilter({ categories }: ProductFilterProps) {
+export default function ProductFilter() {
   const [open, setOpen] = useState(false)
 
   return (
@@ -145,7 +118,6 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
           <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
             Thoughtfully designed objects for the workspace, home, and travel.
-            {categories}
           </p>
         </div>
 

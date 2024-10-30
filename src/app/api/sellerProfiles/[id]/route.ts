@@ -19,10 +19,12 @@ export async function POST(req: NextRequest) {
     console.log('Received data:', data);
     const result = await db.collection('sellerProfiles').insertOne(data);
     console.log('Insert result:', result);
-    return NextResponse.json(result.ops[0], { status: 201 });
+    // return NextResponse.json(result.ops[0], { status: 201 });
+    return NextResponse.json({ id: result.insertedId, ...data }, { status: 201 });
   } catch (error) {
+    const errorMessage = (error as Error).message || 'Error creating seller profile';
     console.error('Error in POST /api/sellerProfiles/route:', error);
-    console.error('Error details:', error.message);
+    console.error('Error details:', errorMessage);
     return NextResponse.json({ error: 'Error creating seller profile' }, { status: 500 });
   }
 }

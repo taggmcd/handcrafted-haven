@@ -36,7 +36,7 @@ const Products = () => {
   return (
     <div className={styles.container}>
       {products.length > 0 ? (
-        products.map((product) => (
+        products.map((product: Product) => (
           <div key={product.id} className={styles.card}>
             <img src={product.imageUrl} alt={product.name} className={styles.image} />
             <div className={styles.details}>
