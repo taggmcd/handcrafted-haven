@@ -1,13 +1,12 @@
 // app/api/register/route.ts
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import clientPromise from '@/app/lib/mongodb'; // Certifique-se de que o caminho está correto
+import { connectToDatabase } from '@/app/lib/mongodb';
 
 export async function POST(req: Request) {
   try {
     // console.log('Creating user...');
-    const client = await clientPromise;
-    const db = client.db('yourDatabaseName'); // Altere para o nome do seu banco de dados
+    const { db } = await connectToDatabase();
     const collection = db.collection('users');
 
     const body = await req.json();

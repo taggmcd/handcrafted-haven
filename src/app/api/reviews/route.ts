@@ -1,6 +1,6 @@
 // src/app/api/reviews/route.ts
 import { NextResponse } from 'next/server';
-import clientPromise from '@/app/lib/mongodb';
+import { connectToDatabase } from '@/app/lib/mongodb';
 import { getToken } from 'next-auth/jwt';
 
 export async function POST(req: Request) {
@@ -14,8 +14,7 @@ export async function POST(req: Request) {
   const user_id = token.id;
 
   try {
-    const client = await clientPromise;
-    const db = client.db('yourDatabaseName'); // Substitua pelo nome correto do banco
+    const { db } = await connectToDatabase();
 
     const newReview = {
       user_id,
