@@ -43,7 +43,9 @@ const Products = () => {
               <h2 className={styles.title}>{product.name}</h2>
               <p className={styles.description}>{product.description}</p>
               <p className={styles.price}>Price: ${product.price}</p>
+              <Link href={`/reviews?productId=${product._id}`}>
               <StarRating rating={Math.round(calculateAverageRating(product.ratings))} />
+              </Link>
               <Link href={`/products/${product._id}`}>
                 <span className={styles.link}>View Product</span>
               </Link>

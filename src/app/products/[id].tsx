@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -14,11 +12,14 @@ interface Product {
   sellerId: string;
 }
 
-const ProductDetail = () => {
-  const router = useRouter();
-  const { id } = router.query;
+const ProductDetail = ({ params }: { params: { id: string } }) => {
+  // const router = useRouter();
+  // const id  = router.query.id;
+console.log(params.id);
   const [product, setProduct] = useState<Product | null>(null);
 
+    const id = params.id;
+  console.log(id);
   useEffect(() => {
     if (id) {
       const fetchProduct = async () => {
