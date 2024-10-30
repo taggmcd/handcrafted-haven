@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { roboto } from '@/app/ui/fonts';
 import "./ui/globals.css";
-import Nabar from "./ui/navbar";
+import Navbar from "./ui/navbar";
 import Footer from "./ui/footer";
 
-export const metadata: Metadata = {
-  title: "Handcrafted Haven",
-  description: "Where you can find all your handcrafted needs",
-};
+export const metadata: Metadata = {   title: {     default: 'Handcrafted Haven',     template: '%s - Handcrafted Haven',   },  description: 'Where you can find all your handcrafted needs',   openGraph: {     type: 'website',     siteName: 'Handcrafted Haven',   }, };
 
 export default function RootLayout({
   children,
@@ -19,7 +16,7 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased bg-white`}
       >
-        <Nabar />
+        <Navbar />
         {children}
       <Footer />
       </body>
